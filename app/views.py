@@ -1,3 +1,10 @@
-from django.shortcuts import render
+from django.http import HttpResponse
+from .tasks import add, mul
 
-# Create your views here.
+
+def home(request):
+  # celery task assign
+  add.delay(10, 10)
+
+  # get user response as possible
+  return HttpResponse("done!")
